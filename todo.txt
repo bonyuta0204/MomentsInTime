@@ -1,0 +1,22 @@
+# index <-> label
+save label in JSON format.
+import the label file and use as python dict.
+
+Directory for data sorce
+* data-root
+  L train
+        L category
+              L movie1.mp4
+              L movie2.mp4
+              L movie3.mp4
+              L movie1/
+                  L movie1_0030.png
+                  L movie1_0031.png
+                      |
+                      |
+   L test/
+   L train_index.csv
+   L test_index.csv
+   L ImageNet_label.json
+   L place365_label.json
+

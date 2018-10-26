@@ -1,10 +1,18 @@
+import MITDataLoader
+import MITData
+import net from Network
 
-for data in DataLoader:
-    data.build_image_from_movie(save=True)
-    sum_activation = 0;
-    for image in data.cropped_images():
-        sum_activation += net(image)
-    # something to get label in text or index
-    label = hogehoge
-    data.label = label
+result_index = []
+# load data and give them to CNN
+for index, data in MITDataLoader:
+    # image batch is tensor with shape (N, 3, x, y)
+    # predict has shape (N, n_classes)
+    predict = net(data.image_batch)
+    predict_ave = predict.mean(axis=1)
+    label = torch.argmax(predict_ave)
+    result_index.append({"index":index,
+        "directory": data.directory,
+        "train":data.train,
+        "category":data.category
+        "object-category":label})
 
