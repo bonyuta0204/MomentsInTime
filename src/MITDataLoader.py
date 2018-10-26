@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pandas as pd
 
 class MITDataLoader:
     def __init__(self, train=True):
@@ -24,13 +25,16 @@ class MITDataLoader:
         n = 0
         for category in os.listdir(self.root_dir):
             for movie in os.listdir(os.path.join(self.root_dir, category)):
-                index.append({"index": n, "directory": os.path.join(self.root_dir, category), "filename":movie, "train":"train", "category":category})
+                index.append({"index": n, 
+                            "directory": os.path.join(self.root_dir, category), 
+                            "filename":movie, "train":"train", "category":category})
                 n  += 1;
-        return index
+
+        df = pd.DataFrame(index)
+        df = df.set_index("index")
+        df.to_csv(os.path.join("train_index.csv"), index_label="index")
 
 if __name__ == '__main__':
-    import pandas as pd
     train_loader = MITDataLoader(train=True)
-    df = pd.DataFrame(train_loader.parse_directory())
-    df.to_csv("train_index.csv")
+    train_loader.parse_directory()
 
