@@ -1,6 +1,8 @@
-import MITDataLoader
+import torch
+
 import MITData
-import net from Network
+import MITDataLoader
+import net
 
 result_index = []
 # load data and give them to CNN
@@ -10,9 +12,11 @@ for index, data in MITDataLoader:
     predict = net(data.image_batch)
     predict_ave = predict.mean(axis=1)
     label = torch.argmax(predict_ave)
-    result_index.append({"index":index,
-        "directory": data.directory,
-        "train":data.train,
-        "category":data.category
-        "object-category":label})
 
+    result_index.append({
+        "index": index,
+        "directory": data.directory,
+        "train": data.train,
+        "category": data.category,
+        "object-category": label
+    })

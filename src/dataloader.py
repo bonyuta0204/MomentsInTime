@@ -1,8 +1,7 @@
 import os
 
 import pandas as pd
-
-from MITData import MITData
+from mitdata import MITData
 
 
 class MITDataLoader:
@@ -48,6 +47,9 @@ class MITDataLoader:
         data = self.index.loc[x]
         mitdata = MITData(data["directory"], data["filename"], data["train"])
         return mitdata
+
+    def reset(self):
+        self._i = 0
 
     # create csv file based on directory
     def parse_directory(self):
