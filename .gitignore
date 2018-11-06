@@ -1,4 +1,3 @@
-data
 __pycache__/
 .ipynb_checkpoints/
 *.csv
@@ -6,4 +5,9 @@ __pycache__/
 node_modules/
 nohup.out
 *Untitled*
+data/*
+!data/MIT_data
+data/MIT_data/*
+!data/MIT_data/test_index.csv
+!data/MIT_data/train_index.csv
 
