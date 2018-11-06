@@ -3,9 +3,13 @@ import os
 import pandas as pd
 from mitdata import MITData
 
+ROOT_DIR = os.path.join("/", *os.path.abspath(__file__).split("/")[:-2])
+
 
 class MITDataLoader:
-    def __init__(self, root_dir="../data/MIT_data", train=True):
+    def __init__(self,
+                 root_dir=os.path.join(ROOT_DIR, "data/MIT_data"),
+                 train=True):
         self.train = train
         self.root_dir = root_dir
 
@@ -39,17 +43,29 @@ class MITDataLoader:
             raise StopIteration
         index = self._i
         data = self.index.loc[self._i]
-        mitdata = MITData(data["directory"], data["filename"], data["train"])
+        mitdata = MITData(data["directory"], data["filename"], data["train"],
+                          data["object_label"], data["scene_label"])
         self._i += 1
         return index, mitdata
 
     def __getitem__(self, x):
         data = self.index.loc[x]
-        mitdata = MITData(data["directory"], data["filename"], data["train"])
+        mitdata = MITData(data["directory"], data["filename"], data["train"],
+                          data["object_label"], data["scene_label"])
         return mitdata
 
     def reset(self):
         self._i = 0
+
+    def save_index(self):
+        if self.train:
+            self.index.to_csv(
+                os.path.join(self.root_dir, "train_index.csv"),
+                index_label="index")
+        else:
+            self.index.to_csv(
+                os.path.join(self.root_dir, "test_index.csv"),
+                index_label="index")
 
     # create csv file based on directory
     def parse_directory(self):

@@ -1,0 +1,23 @@
+
+.video-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.panel-wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 80vw;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.video-label {
+  text-align: center;
+}
+
+.label-wrapper {
+  display: flex;
+  justify-content:  space-between;
+}

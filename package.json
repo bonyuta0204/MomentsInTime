@@ -1,0 +1,22 @@
+{
+  "name": "momentsintime",
+  "version": "1.0.0",
+  "description": "analysis of Moments in Time dataset",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonyuta0204/MomentsInTime.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bonyuta0204/MomentsInTime/issues"
+  },
+  "homepage": "https://github.com/bonyuta0204/MomentsInTime#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}

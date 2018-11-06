@@ -1,17 +1,22 @@
 import os
 
+from PIL import Image
+
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 
 
 class MITData:
-    def __init__(self, dir_path, filename, train):
+    def __init__(self, dir_path, filename, train, object_label, scene_label):
         self.dir_path = dir_path
         self.filename = filename
+        print(self.dir_path)
+        print(self.filename)
         self.moviepath = os.path.join(self.dir_path, self.filename)
         self.train = train
+        self.object_label = object_label
+        self.scene_label = scene_label
         self.category = os.path.split(self.dir_path)[1]
         self.image_dir = os.path.join(self.dir_path,
                                       self.filename.split(".")[0])

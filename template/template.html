@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movie</title>
+    <link rel="stylesheet" href="css/custom.css" type="text/css" media="screen" charset="utf-8">
+  </head>
+  <body>
+    <div class="panel-wrapper">
+      {% for n, data in train_loader %}
+      <div class="video-panel">
+        <div class="label-wrapper">
+          <label>No.{{ n }}</label>
+          <label class="video-label">{{ data.object_label }}</label>
+        </div>
+        <video muted autoplay loop width="256px" height="256px">
+          <source src="{{ data.converted_moviepath[3:] }}" type='video/mp4'>
+        </video>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
