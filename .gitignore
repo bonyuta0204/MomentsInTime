@@ -1,10 +1,16 @@
 __pycache__/
+node_modules/
 .ipynb_checkpoints/
+
+#exclude some type
 *.csv
 *.pyc
-node_modules/
-nohup.out
 *Untitled*
+
+#exclude some file
+index.html
+nohup.out
+
 data/*
 !data/MIT_data
 data/MIT_data/*
