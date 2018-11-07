@@ -1,8 +1,8 @@
-
 .video-panel {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 15px 0px;
 }
 
 .panel-wrapper {
@@ -20,4 +20,5 @@
 .label-wrapper {
   display: flex;
   justify-content:  space-between;
+  margin-bottom: 0.1em;
 }
