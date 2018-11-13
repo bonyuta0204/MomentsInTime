@@ -3,6 +3,7 @@ node_modules/
 .ipynb_checkpoints/
 
 #exclude some type
+*.lock
 *.csv
 *.pyc
 *Untitled*

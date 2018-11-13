@@ -14,6 +14,16 @@ then
   exit 1
 fi
 
+lockfile=watch.lock
+
+mkdir ${lockfile} > /dev/null 2>&1
+if [ $? -ne 0 ];then
+  echo "Process is already runnning"
+  exit 1
+fi
+
+trap 'rmdir ${lockfile} 2>&1; exit' INT TERM
+
 INTERVAL=1 #監視間隔, 秒で指定
 last=`update $1`
 echo "Watching... file: $1"
