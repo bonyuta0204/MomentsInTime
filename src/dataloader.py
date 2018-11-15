@@ -40,18 +40,20 @@ class MITDataLoader:
 
     def __next__(self):
         if self._i == self.index.shape[0]:
+            print("end of iteration")
             raise StopIteration
-        index = self._i
         data = self.index.loc[self._i]
-        mitdata = MITData(data["directory"], data["filename"], data["train"],
-                          data["object_label"], data["scene_label"])
+        mitdata = MITData(self._i, data["directory"], data["filename"],
+                          data["train"], data["object_label"],
+                          data["scene_label"])
         self._i += 1
-        return index, mitdata
+        return mitdata
 
     def __getitem__(self, x):
         data = self.index.loc[x]
-        mitdata = MITData(data["directory"], data["filename"], data["train"],
-                          data["object_label"], data["scene_label"])
+        mitdata = MITData(self._i, data["directory"], data["filename"],
+                          data["train"], data["object_label"],
+                          data["scene_label"])
         return mitdata
 
     def reset(self):
@@ -66,6 +68,19 @@ class MITDataLoader:
             self.index.to_csv(
                 os.path.join(self.root_dir, "test_index.csv"),
                 index_label="index")
+
+    def filter_data(self, filter_func):
+        """
+        return iterator filtered by filter_func
+        filter_func takes one MITData as args
+
+        Example:
+            for data in train_loader.filter_data(lambda data: data.index <= 200):
+                print(data.index)
+        will print number 1 ~ 200
+        """
+        return filter(filter_func, iter(self))
+
 
     # create csv file based on directory
     def parse_directory(self):
@@ -122,5 +137,6 @@ class MITDataLoader:
 
 if __name__ == '__main__':
     train_loader = MITDataLoader(train=True)
-    data = train_loader[247]
-    data.crop_image()
+    for data in train_loader.filter_data(lambda data: data.index <= 200):
+        print(data.object_label)
+        print(data.object_label_list)

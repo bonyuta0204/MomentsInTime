@@ -7,10 +7,10 @@
   </head>
   <body>
     <div class="panel-wrapper">
-      {% for n, data in train_loader %}
+      {% for data in data_iter %}
       <div class="video-panel">
         <div class="label-wrapper">
-          <label>No.{{ n }}</label>
+          <label>No.{{ data.index }}</label>
           <label class="video-label">{{ data.object_label }}</label>
         </div>
         <video muted autoplay loop width="256px" height="256px">

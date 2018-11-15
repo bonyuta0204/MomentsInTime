@@ -6,22 +6,28 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 class MITData:
-    def __init__(self, dir_path, filename, train, object_label, scene_label):
+    def __init__(self, index, dir_path, filename, train, object_label,
+                 scene_label):
+        self.index = index
         self.dir_path = dir_path
         self.filename = filename
-        print(self.dir_path)
-        print(self.filename)
         self.moviepath = os.path.join(self.dir_path, self.filename)
         self.train = train
         self.object_label = object_label
+        self.object_label_list = str(self.object_label).split(" ")
         self.scene_label = scene_label
         self.category = os.path.split(self.dir_path)[1]
         self.image_dir = os.path.join(self.dir_path,
                                       self.filename.split(".")[0])
         self.converted_moviepath = os.path.join("../data/MIT_data/h264",
                                                 *self.moviepath.split("/")[3:])
+
+    def has_object_label(self, label):
+        if label in self.object_label_list:
+            return True
+        else:
+            return False
 
     def crop_image(self, frames=[22, 45, 67]):
         if not os.path.isdir(self.image_dir):
@@ -71,4 +77,4 @@ class MITData:
 if __name__ == "__main__":
     data = MITData("../data/MIT_data/training/aiming/", "v035_0005.mp4",
                    "training")
-    print(data.converted_moviepath)
+    print(data.object_label_list)
