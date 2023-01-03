@@ -18,3 +18,9 @@ data/MIT_data/*
 !data/MIT_data/test_index.csv
 !data/MIT_data/train_index.csv
 
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
